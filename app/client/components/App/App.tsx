@@ -1,26 +1,20 @@
+import 'regenerator-runtime/runtime';
+import './App.scss';
 import { h, FunctionalComponent } from 'preact';
 import block from 'bem-cn';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import loadable from '@loadable/component';
 
-import './App.scss';
+const HomeLoadable = loadable(() => import('client/components/pages/Home/Home'));
 
 const b = block('App');
 
 const App: FunctionalComponent = () => {
   return (
     <div className={b()}>
-      Whats up fridge?
-
-      <Link to="/">Home link</Link>
-      <Link to="/about">About link</Link>
-
       <Switch>
         <Route exact path="/">
-          <div>Home</div>
-        </Route>
-
-        <Route path="/about">
-          <div>About</div>
+          <HomeLoadable />
         </Route>
       </Switch>
     </div>

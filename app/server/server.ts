@@ -5,6 +5,7 @@ import expressSession from 'express-session';
 import morgan from 'morgan';
 
 import render from 'server/middlewares/render';
+import apiRouter from 'server/api/apiRouter';
 
 const app = express();
 
@@ -25,6 +26,7 @@ app
     }),
   }))
   .use(morgan(':method :url :status :response-time ms :date[iso]'))
+  .use('/api', apiRouter)
   .get('*', render);
 
 app.listen(2727, () => console.log('\nListening on port 2727...'));
