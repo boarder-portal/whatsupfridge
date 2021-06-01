@@ -6,14 +6,15 @@ import block from 'bem-cn';
 const b = block('Container');
 
 interface IContainerProps {
+  className?: string;
   children: ComponentChild;
 }
 
 const Container: FunctionalComponent<IContainerProps> = (props) => {
-  const { children } = props;
+  const { className, children } = props;
 
   return (
-    <div className={b()}>
+    <div className={b.mix(className)}>
       {children}
     </div>
   );

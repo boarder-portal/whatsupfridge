@@ -4,6 +4,7 @@
     "target": "es2017",
     "strict": true,
     "outDir": "./dist",
+    "lib": ["dom"],
     "jsx": "preserve",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",

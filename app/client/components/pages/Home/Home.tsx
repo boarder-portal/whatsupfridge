@@ -3,6 +3,7 @@ import { h } from 'preact';
 import { memo } from 'preact/compat';
 import block from 'bem-cn';
 import { useCallback } from 'preact/hooks';
+import { useHistory } from 'react-router-dom';
 
 import httpClient from 'client/utilities/HttpClient/HttpClient';
 
@@ -12,11 +13,13 @@ import Button from 'client/components/common/Button/Button';
 const b = block('Home');
 
 const Home: React.FC = () => {
-  const handleCreateRoomClick = useCallback(async () => {
-    const newRoom = await httpClient.createRoom();
+  const history = useHistory();
 
-    console.log('newRoom', newRoom);
-  }, []);
+  const handleCreateRoomClick = useCallback(async () => {
+    const { room: newRoom } = await httpClient.createRoom();
+
+    history.push(`/room/${newRoom.id}`);
+  }, [history]);
 
   return (
     <Container>
