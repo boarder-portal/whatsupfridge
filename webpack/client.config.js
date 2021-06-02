@@ -18,13 +18,15 @@ module.exports = {
   },
   entry: path.resolve(__dirname, '../app/client/client.tsx'),
   output: {
-    filename: '[name].js',
-    chunkFilename: '[name].[contenthash].js',
+    filename: '[contenthash].js',
+    chunkFilename: '[contenthash].js',
     path: path.resolve(__dirname, '../build/client'),
   },
   plugins: [
     new LoadablePlugin(),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[contenthash].css',
+    }),
     process.env.ANALYZE_BUNDLE ? new BundleAnalyzerPlugin() : undefined,
   ].filter(Boolean)
 }
