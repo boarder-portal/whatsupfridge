@@ -2,7 +2,8 @@ import { h, FunctionalComponent, JSX } from 'preact';
 import { memo } from 'preact/compat';
 import { useParams } from 'react-router-dom';
 import block from 'bem-cn';
-import { useCallback, useEffect, useState } from 'preact/hooks';
+import { useCallback, useEffect, useMemo, useState } from 'preact/hooks';
+import isEqual from 'lodash/isEqual';
 
 import { IRoom } from 'common/types/room';
 
@@ -16,26 +17,49 @@ const b = block('Room');
 
 const Room: FunctionalComponent = () => {
   const { roomId } = useParams<{ roomId: string }>();
-  const [room, setRoom] = useState<IRoom | null>(null);
+  const [localRoom, setLocalRoom] = useState<IRoom | null>(null);
+  const [dbRoom, setDbRoom] = useState<IRoom | null>(null);
   const [newProductName, setNewProductName] = useState('');
 
-  const updateRoom = useCallback(async () => {
-    const { room: requestedRoom } = await httpClient.getRoom({ id: roomId });
+  const isLocalRoomEqualToDBRoom = useMemo(() => {
+    if (!localRoom || !dbRoom) {
+      return true;
+    }
 
-    setRoom(requestedRoom);
+    return isEqual(localRoom, {
+      ...dbRoom,
+      products: [...dbRoom.products].sort((a, b) => a.value - b.value),
+    });
+  }, [localRoom, dbRoom]);
+
+  const updateRoom = useCallback(async () => {
+    const { room: requestedDBRoom } = await httpClient.getRoom({ id: roomId });
+
+    setDbRoom(requestedDBRoom);
+    setLocalRoom({
+      ...requestedDBRoom,
+      products: [...requestedDBRoom.products].sort((a, b) => a.value - b.value),
+    });
   }, [roomId]);
 
   const handleAddProduct = useCallback(async () => {
-    if (!newProductName) {
+    if (!newProductName || !localRoom) {
       return;
     }
 
-    await httpClient.addProduct({ roomId, name: newProductName });
-
-    await updateRoom();
+    setLocalRoom({
+      ...localRoom,
+      products: [
+        ...localRoom.products,
+        {
+          name: newProductName,
+          value: 0,
+        },
+      ],
+    });
 
     setNewProductName('');
-  }, [newProductName, roomId, updateRoom]);
+  }, [localRoom, newProductName]);
 
   useEffect(() => {
     (async () => {
@@ -43,7 +67,7 @@ const Room: FunctionalComponent = () => {
     })();
   }, [roomId, updateRoom]);
 
-  if (!room) {
+  if (!dbRoom || !localRoom) {
     return null;
   }
 
@@ -52,7 +76,7 @@ const Room: FunctionalComponent = () => {
       🥗 Продукты
 
       <div>
-        {room.products.map((product, index) => (
+        {localRoom.products.map((product, index) => (
           <div key={index}>
             <span>{product.name}</span>
 
@@ -63,19 +87,15 @@ const Room: FunctionalComponent = () => {
               max="1"
               step="0.05"
               onChange={(e: JSX.TargetedEvent<HTMLInputElement>) => {
-                if (!room) {
-                  return;
-                }
-
-                setRoom({
-                  ...room,
+                setLocalRoom({
+                  ...localRoom,
                   products: [
-                    ...room.products.slice(0, index),
+                    ...localRoom.products.slice(0, index),
                     {
                       name: product.name,
                       value: Number(e.currentTarget.value),
                     },
-                    ...room.products.slice(index + 1),
+                    ...localRoom.products.slice(index + 1),
                   ],
                 });
               }}
@@ -91,14 +111,23 @@ const Room: FunctionalComponent = () => {
       </div>
 
       <Button
-        onClick={async () => {
-          if (!room) {
-            return;
-          }
+        disabled={isLocalRoomEqualToDBRoom}
+        onClick={() => {
+          setLocalRoom({
+            ...dbRoom,
+            products: [...dbRoom.products].sort((a, b) => a.value - b.value),
+          });
+        }}
+      >
+        Сбросить
+      </Button>
 
+      <Button
+        disabled={isLocalRoomEqualToDBRoom}
+        onClick={async () => {
           await httpClient.changeProducts({
             roomId,
-            products: room.products,
+            products: localRoom.products,
           });
 
           await updateRoom();

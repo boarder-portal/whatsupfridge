@@ -29,7 +29,7 @@ const Home: React.FC = () => {
         className={b('createButton')}
         onClick={handleCreateRoomClick}
       >
-        Создать комнату
+        Создать холодильник
       </Button>
     </Container>
   );
