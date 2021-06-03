@@ -80,10 +80,11 @@ const Room: FunctionalComponent = () => {
 
       <Flex direction="column" between={2}>
         {localRoom.products.map((product, index) => (
-          <div key={index}>
+          <Flex justifyContent="spaceBetween" key={index}>
             <span>{product.name}</span>
 
             <input
+              style={{ width: '100px' }}
               type="range"
               value={product.value}
               min="0"
@@ -103,7 +104,7 @@ const Room: FunctionalComponent = () => {
                 });
               }}
             />
-          </div>
+          </Flex>
         ))}
       </Flex>
 
