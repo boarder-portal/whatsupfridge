@@ -9,6 +9,7 @@ import httpClient from 'client/utilities/HttpClient/HttpClient';
 
 import Container from 'client/components/common/Container/Container';
 import Button from 'client/components/common/Button/Button';
+import Heading from 'client/components/common/Heading/Heading';
 
 const b = block('Home');
 
@@ -23,12 +24,9 @@ const Home: React.FC = () => {
 
   return (
     <Container>
-      <div>🛒 Что по холодильнику?</div>
+      <Heading level={1}>🛒 Что по холодильнику?</Heading>
 
-      <Button
-        className={b('createButton')}
-        onClick={handleCreateRoomClick}
-      >
+      <Button className={b('createButton')} onClick={handleCreateRoomClick}>
         Создать холодильник
       </Button>
     </Container>

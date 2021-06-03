@@ -1,9 +1,10 @@
-import { h, FunctionalComponent, JSX } from 'preact';
+import './Room.scss';
+import { FunctionalComponent, h, JSX } from 'preact';
 import { memo } from 'preact/compat';
 import { useParams } from 'react-router-dom';
 import block from 'bem-cn';
 import { useCallback, useEffect, useMemo, useState } from 'preact/hooks';
-import isEqual from 'lodash/isEqual';
+import isEqual from 'fast-deep-equal';
 
 import { IRoom } from 'common/types/room';
 
@@ -12,6 +13,8 @@ import httpClient from 'client/utilities/HttpClient/HttpClient';
 import Container from 'client/components/common/Container/Container';
 import Input from 'client/components/common/Input/Input';
 import Button from 'client/components/common/Button/Button';
+import Heading from 'client/components/common/Heading/Heading';
+import Flex from 'client/components/common/Flex/Flex';
 
 const b = block('Room');
 
@@ -73,9 +76,9 @@ const Room: FunctionalComponent = () => {
 
   return (
     <Container className={b()}>
-      🥗 Продукты
+      <Heading level={1}>🥗 Продукты</Heading>
 
-      <div>
+      <Flex direction="column" between={2}>
         {localRoom.products.map((product, index) => (
           <div key={index}>
             <span>{product.name}</span>
@@ -102,15 +105,16 @@ const Room: FunctionalComponent = () => {
             />
           </div>
         ))}
-      </div>
+      </Flex>
 
-      <div>
+      <Flex between={2}>
         <Input value={newProductName} onInput={setNewProductName} />
 
         <Button onClick={handleAddProduct}>Добавить</Button>
-      </div>
+      </Flex>
 
       <Button
+        type="danger"
         disabled={isLocalRoomEqualToDBRoom}
         onClick={() => {
           setLocalRoom({
@@ -133,7 +137,7 @@ const Room: FunctionalComponent = () => {
           await updateRoom();
         }}
       >
-          Сохранить
+        Сохранить
       </Button>
     </Container>
   );

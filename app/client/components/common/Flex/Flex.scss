@@ -1,0 +1,61 @@
+.Flex {
+  display: flex;
+
+  &_direction {
+    &_row {
+      flex-direction: row;
+    }
+
+    &_column {
+      flex-direction: column;
+    }
+  }
+
+  &_justifyContent {
+    &_center {
+      justify-content: center;
+    }
+
+    &_flexStart {
+      justify-content: flex-start;
+    }
+
+    &_flexEnd {
+      justify-content: flex-end;
+    }
+  }
+
+  &_alignItems {
+    &_center {
+      align-items: center;
+    }
+
+    &_flexStart {
+      align-items: flex-start;
+    }
+
+    &_flexEnd {
+      align-items: flex-end;
+    }
+
+    &_stretch {
+      align-items: stretch;
+    }
+  }
+
+  :not(&_direction_column).Flex_between {
+    @for $i from 1 through 10 {
+      &_#{$i} > :not(:first-child) {
+        margin-left: $i * 4px;
+      }
+    }
+  }
+
+  &_direction_column.Flex_between {
+    @for $i from 1 through 10 {
+      &_#{$i} > :not(:first-child) {
+        margin-top: $i * 4px;
+      }
+    }
+  }
+}
