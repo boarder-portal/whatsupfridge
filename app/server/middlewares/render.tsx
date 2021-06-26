@@ -38,7 +38,11 @@ export default function render(req: Request, res: Response) {
         <title>Что по холодильнику?</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width">
+        <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png">
         <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+        <link rel="manifest" href="/public/manifest.json" />
         ${linkTags}
         ${styleTags}
     </head>
