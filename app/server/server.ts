@@ -15,18 +15,24 @@ const redisStore = connectRedis(expressSession);
 const redisClient = redis.createClient();
 
 app
-  .use(expressSession({
-    secret: 'secrettttt',
-    cookie: {
-      maxAge: SESSION_ALIVE_TIME_MS,
-    },
-    store: new redisStore({
-      client: redisClient,
-      prefix: 'whatsupfridge',
+  .use(
+    expressSession({
+      secret: 'secrettttt',
+      cookie: {
+        maxAge: SESSION_ALIVE_TIME_MS,
+      },
+      store: new redisStore({
+        client: redisClient,
+        prefix: 'whatsupfridge',
+      }),
     }),
-  }))
+  )
   .use(morgan(':method :url :status :response-time ms :date[iso]'))
   .use('/api', apiRouter)
   .get('*', render);
 
-app.listen(2727, () => console.log('\nListening on port 2727...'));
+app.listen(2727, () =>
+  console.log(
+    '\nListening on port http://localhost:2727, with nginx - http://localhost:2828',
+  ),
+);
