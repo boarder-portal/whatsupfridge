@@ -1,0 +1,8 @@
+.Piano {
+  padding: 8px;
+
+  &__addStepButton,
+  &__saveSongButton {
+    align-self: flex-start;
+  }
+}

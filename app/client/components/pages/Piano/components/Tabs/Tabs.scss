@@ -1,0 +1,26 @@
+.Tabs {
+  &__step {
+    &_selected {
+      background: yellowgreen;
+    }
+
+    &:not(:first-child) {
+      margin-left: -1px;
+    }
+  }
+
+  &__cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+    border: 1px solid black;
+    white-space: nowrap;
+
+    &:not(:first-child) {
+      margin-top: -1px;
+    }
+  }
+}

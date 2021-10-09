@@ -1,0 +1,38 @@
+.Board {
+  &__key {
+    border: 1px solid black;
+    cursor: pointer;
+    user-select: none;
+
+    &_color {
+      &_white {
+        width: 30px;
+        height: 135px;
+      }
+
+      &_black {
+        width: 22px;
+        height: 100px;
+        background: black;
+        z-index: 2;
+        margin-left: -11px;
+      }
+
+      &_black + &_white {
+        margin-left: -12px;
+      }
+
+      &_white + &_white {
+        margin-left: -1px;
+      }
+    }
+
+    &_pressedLeft {
+      background: yellowgreen;
+    }
+
+    &_pressedRight {
+      background: indianred;
+    }
+  }
+}
