@@ -3,11 +3,11 @@ import { FunctionalComponent, h } from 'preact';
 import { memo } from 'preact/compat';
 import block from 'bem-cn';
 import { useCallback, useState } from 'preact/hooks';
+import { Flex } from 'boarder-components';
 
 import { EHand } from 'client/components/pages/Piano/types';
 
 import Board from 'client/components/pages/Piano/components/Board/Board';
-import Flex from 'client/components/common/Flex/Flex';
 import Button from 'client/components/common/Button/Button';
 import Tabs from 'client/components/pages/Piano/components/Tabs/Tabs';
 

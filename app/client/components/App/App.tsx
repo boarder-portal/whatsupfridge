@@ -1,5 +1,6 @@
 import 'regenerator-runtime/runtime';
 import './App.scss';
+import 'boarder-components/dist/index.css';
 import { h, FunctionalComponent } from 'preact';
 import block from 'bem-cn';
 import { Switch, Route } from 'react-router-dom';

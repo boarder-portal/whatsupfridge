@@ -2,10 +2,10 @@ import './Board.scss';
 import { FunctionalComponent, h } from 'preact';
 import { memo } from 'preact/compat';
 import block from 'bem-cn';
+import { Flex } from 'boarder-components';
 
 import { EHand } from 'client/components/pages/Piano/types';
 
-import Flex from 'client/components/common/Flex/Flex';
 import { OCTAVE_IDS } from 'client/components/pages/Piano/constants';
 import { IPressedKeys } from 'client/components/pages/Piano/Piano';
 

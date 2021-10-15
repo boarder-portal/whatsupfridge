@@ -4,13 +4,13 @@ import { memo } from 'preact/compat';
 import block from 'bem-cn';
 import { useCallback, useMemo, useState } from 'preact/hooks';
 import isEqual from 'fast-deep-equal';
+import { Flex } from 'boarder-components';
 
 import { IRoom } from 'common/types/room';
 
 import httpClient from 'client/utilities/HttpClient/HttpClient';
 
 import ProductCategories from 'client/components/pages/Room/components/Fridge/components/ProductCategories/ProductCategories';
-import Flex from 'client/components/common/Flex/Flex';
 import Input from 'client/components/common/Input/Input';
 import Button from 'client/components/common/Button/Button';
 

@@ -8,7 +8,7 @@ module.exports = {
         use: 'babel-loader',
         exclude: /node_modules/,
       },
-    ]
+    ],
   },
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   resolve: {
@@ -24,7 +24,7 @@ module.exports = {
   devtool: 'source-map',
   optimization: {
     splitChunks: {
-      chunks: "all",
+      chunks: 'all',
     },
   },
-}
+};

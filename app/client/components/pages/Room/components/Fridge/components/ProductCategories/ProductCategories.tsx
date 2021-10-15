@@ -2,11 +2,11 @@
 import { h, FunctionalComponent, JSX } from 'preact';
 import { memo } from 'preact/compat';
 import block from 'bem-cn';
+import { Flex } from 'boarder-components';
 
 import { IProduct } from 'common/types/room';
 
 import Heading from 'client/components/common/Heading/Heading';
-import Flex from 'client/components/common/Flex/Flex';
 
 interface IProductCategoriesProps {
   products: IProduct[];

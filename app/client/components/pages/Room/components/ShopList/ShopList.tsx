@@ -3,12 +3,12 @@ import { h, FunctionalComponent } from 'preact';
 import { memo } from 'preact/compat';
 import block from 'bem-cn';
 import { useCallback, useMemo, useState } from 'preact/hooks';
+import { Flex } from 'boarder-components';
 
 import { IProduct } from 'common/types/room';
 
 import httpClient from 'client/utilities/HttpClient/HttpClient';
 
-import Flex from 'client/components/common/Flex/Flex';
 import Heading from 'client/components/common/Heading/Heading';
 import Button from 'client/components/common/Button/Button';
 

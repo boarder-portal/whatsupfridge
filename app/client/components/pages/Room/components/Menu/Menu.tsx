@@ -3,8 +3,7 @@ import { h, FunctionalComponent } from 'preact';
 import { memo } from 'preact/compat';
 import block from 'bem-cn';
 import { NavLink } from 'react-router-dom';
-
-import Flex from 'client/components/common/Flex/Flex';
+import { Flex } from 'boarder-components';
 
 interface IMenuProps {
   roomId: string;

@@ -2,8 +2,8 @@ import './Tabs.scss';
 import { h, FunctionalComponent } from 'preact';
 import { memo } from 'preact/compat';
 import block from 'bem-cn';
+import { Flex } from 'boarder-components';
 
-import Flex from 'client/components/common/Flex/Flex';
 import { IPressedKeys } from 'client/components/pages/Piano/Piano';
 import { OCTAVE_IDS } from 'client/components/pages/Piano/constants';
 
